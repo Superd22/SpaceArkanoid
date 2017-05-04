@@ -1,5 +1,6 @@
 package spaceArkanoid.controller;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -20,7 +21,7 @@ public class Raquette implements GameEntity {
 	/** State service */
 	private State state = State.getState();
 	
-	/** our mouse motin listener */
+	/** our mouse motion listener */
 	private MouseMotionListener mouseListener = new MouseMotionListener(){
 		public void mouseDragged(MouseEvent e) {}
 		public void mouseMoved(MouseEvent e) {
@@ -56,10 +57,16 @@ public class Raquette implements GameEntity {
 	
 
 	public void renderEntity(Graphics2D g2) {
-		g2.drawRect(model.pos_x, model.pos_y, model.width, model.height);
+		g2.setColor(new Color(200,200,200));
+		g2.fillRect(model.pos_x, model.pos_y, model.width, model.height);
 	}
 
 	
 	public void updateEntity(double delta) {}
+
+
+	public spaceArkanoid.model.Raquette getModel() {
+		return model;
+	}
 	
 }

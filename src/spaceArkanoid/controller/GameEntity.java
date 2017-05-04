@@ -21,4 +21,6 @@ public interface GameEntity {
 	 * @param delta the delta in time since the last frame
 	 */
 	public void updateEntity(double delta);
+
+	public void activate();
 }

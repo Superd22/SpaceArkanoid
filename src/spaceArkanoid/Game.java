@@ -2,7 +2,9 @@ package spaceArkanoid;
 
 import javax.swing.JFrame;
 
+import spaceArkanoid.controller.Ball;
 import spaceArkanoid.controller.Raquette;
+import spaceArkanoid.service.State;
 
 /**
  * Main Game class containing the game loop
@@ -13,7 +15,7 @@ import spaceArkanoid.controller.Raquette;
 public class Game {
 	
 	/** Whether or not we should update the loop */
-	private boolean gameRunning;
+	private boolean gameRunning = true;
 	/** Last time we rendered a frame */
 	private double lastFpsTime;
 	/** the FPS number for the current second */
@@ -22,6 +24,8 @@ public class Game {
 	private JFrame mainFrame;
 	/** our canvas */
 	private Canvas canvas;
+	private State state = State.getState();
+	
 	/**
 	 * Main Entry point for the game
 	 */
@@ -30,6 +34,9 @@ public class Game {
 		canvas = new Canvas(frame);
 		
 		new Raquette();
+		for(int i = 0; i < 1; i++) 
+		      new Ball();
+		gameLoop();
 	}
 	
 	/**
@@ -39,7 +46,7 @@ public class Game {
 	 */
 	public void gameLoop()	{
 	   long lastLoopTime = System.nanoTime();
-	   final int TARGET_FPS = 60;
+	   final int TARGET_FPS = 120;
 	   final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;   
 
 	   // keep looping round til the game ends
@@ -61,27 +68,37 @@ public class Game {
 	      // we last recorded
 	      if (lastFpsTime >= 1000000000)
 	      {
-	         System.out.println("(FPS: "+fps+")");
-	         lastFpsTime = 0;
-	         fps = 0;
+	    	  System.out.println("(FPS: "+fps+")");
+	    	  System.out.println("(D: "+delta+")");
+		      lastFpsTime = 0;
+		      fps = 0;
 	      }
 	      
 	      // update the game logic
 	      doGameUpdates(delta);
 	      
+	      doGameRender();
 	      
 	      // we want each frame to take 10 milliseconds, to do this
 	      // we've recorded when we started the frame. We add 10 milliseconds
 	      // to this and then factor in the current time to give 
 	      // us our final value to wait for
 	      // remember this is in ms, whereas our lastLoopTime etc. vars are in ns.
-	      try {Thread.sleep( (lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000 );} 
+	      
+	      long nextCall = (lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000;
+	      if (nextCall <= 0) nextCall = 0;
+	      
+	      try {Thread.sleep( nextCall );} 
 	      catch (InterruptedException e) {e.printStackTrace();}
 	   }
 	}
 
 	
 	private void doGameUpdates(double delta) {
-	   
+		state.updateEntities(delta);
+	}
+	
+	private void doGameRender() {
+		canvas.repaint();
 	}
 }

@@ -18,7 +18,7 @@ public class Main {
 		JFrame jf = new JFrame("Test");
 		
 	    jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    jf.setSize(800,1200);
+	    jf.setSize(500,800);
 	    
 	    jf.setVisible(true);
 	    

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import spaceArkanoid.Canvas;
 import spaceArkanoid.controller.GameEntity;
+import spaceArkanoid.controller.Raquette;
 
 /**
  * Singleton Service containing the actual state of the game
@@ -13,15 +14,17 @@ import spaceArkanoid.controller.GameEntity;
  */
 public class State {
 	/** If we're in game over state */
-	private boolean gameOver;
+	private boolean gameOver = false;
 	/** if we're in paused state */
-	private boolean gamePaused;
+	private boolean gamePaused = false;
 	/** if we're in splash screen (start of the game) */
-	private boolean gameSplash;
+	private boolean gameSplash = false;
 	/** our game canvas */
 	private Canvas canvas;
 	/** the array of all the entities we're managning */
 	private ArrayList<GameEntity> entities = new ArrayList<GameEntity>();
+	/** The current bar */
+	private Raquette bar;
 	
 	/** Holder */
 	private static class StateHolder {
@@ -79,6 +82,11 @@ public class State {
 			entities.get(i).updateEntity(delta);
 		}
 	}
+
+	public void registerEntity(Raquette entity) {
+		bar = entity;
+		registerEntity((GameEntity) entity);
+	}
 	
 	/** 
 	 * Register an entity for update
@@ -88,8 +96,11 @@ public class State {
 		synchronized(entities) {
 			entities.add(entity);
 		}
+		
+		entity.activate();
 	}
 	
+
 	/**
 	 * Un-registers an entity for update.
 	 * @param entity the entity to unregister
@@ -106,6 +117,24 @@ public class State {
 	public ArrayList<GameEntity> getEntities() {
 		return entities;
 	}
+	
+	/**
+	 * Launches the game
+	 */
+	public void activateGame() {
+		for(int i = 0; i < entities.size(); i++) {
+			entities.get(i).activate();
+		}
+	}
+
+	public void declareGameOver() {
+		
+	}
+
+	public Raquette getRaquette() {
+		return bar;
+	}
+	
 	
 	
 }
