@@ -1,5 +1,7 @@
 import javax.swing.JFrame;
 
+import spaceArkanoid.Game;
+
 /**
  * Main class, responsible for creating the Java window 
  * and calling the game
@@ -19,6 +21,8 @@ public class Main {
 	    jf.setSize(800,1200);
 	    
 	    jf.setVisible(true);
+	    
+	    Game game = new Game(jf);
 	}
 
 }

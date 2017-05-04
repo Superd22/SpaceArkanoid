@@ -1,5 +1,9 @@
 package spaceArkanoid;
 
+import javax.swing.JFrame;
+
+import spaceArkanoid.controller.Raquette;
+
 /**
  * Main Game class containing the game loop
  * & display options
@@ -14,12 +18,18 @@ public class Game {
 	private double lastFpsTime;
 	/** the FPS number for the current second */
 	private int fps;
-	
+	/** our main frame */
+	private JFrame mainFrame;
+	/** our canvas */
+	private Canvas canvas;
 	/**
 	 * Main Entry point for the game
 	 */
-	public Game() {
+	public Game(JFrame frame) {
+		mainFrame = frame;
+		canvas = new Canvas(frame);
 		
+		new Raquette();
 	}
 	
 	/**
