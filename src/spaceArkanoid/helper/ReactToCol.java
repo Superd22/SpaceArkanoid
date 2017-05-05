@@ -1,6 +1,6 @@
 package spaceArkanoid.helper;
 
-import spaceArkanoid.controller.Ball;
+import spaceArkanoid.controller.ball.Ball;
 
 /**
  * Interface for objects that need to react when they collide with another.

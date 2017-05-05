@@ -66,10 +66,10 @@ public class Collision {
 	 * Will call 
 	 * @param ballController the ball controller
 	 */
-	public static void realizeBricksCollisionWith(spaceArkanoid.controller.Ball ballController) {
+	public static void realizeBricksCollisionWith(spaceArkanoid.controller.ball.Ball ballController) {
 		State state = State.getState();
 		Ball ball = ballController.getModel();
-		ArrayList<spaceArkanoid.controller.Brick> bricks = state.getBrickEntities();
+		ArrayList<spaceArkanoid.controller.brick.Brick> bricks = state.getBrickEntities();
 		Shape shapeB = new Ellipse2D.Double(ball.pos_x, ball.pos_y, ball.width, ball.height);
 		
 		for(int i = 0; i < bricks.size(); i++) {

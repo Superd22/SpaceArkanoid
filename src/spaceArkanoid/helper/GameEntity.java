@@ -2,7 +2,7 @@ package spaceArkanoid.helper;
 
 import java.awt.Graphics2D;
 
-import spaceArkanoid.controller.Ball;
+import spaceArkanoid.controller.ball.Ball;
 
 /**
  * Main interface for any GameEntity that is going to be rendered

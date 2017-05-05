@@ -3,6 +3,8 @@ package spaceArkanoid;
 import javax.swing.JFrame;
 
 import spaceArkanoid.controller.*;
+import spaceArkanoid.controller.ball.Ball;
+import spaceArkanoid.controller.brick.Brick;
 import spaceArkanoid.service.State;
 
 /**
@@ -90,8 +92,9 @@ public class Game {
 	      // to this and then factor in the current time to give 
 	      // us our final value to wait for
 	      // remember this is in ms, whereas our lastLoopTime etc. vars are in ns.
-	      
 	      long nextCall = (lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000;
+	      
+	      // When benchmarking (10k balls lol), we need this.
 	      if (nextCall <= 0) nextCall = 0;
 	      
 	      try {Thread.sleep( nextCall );} 

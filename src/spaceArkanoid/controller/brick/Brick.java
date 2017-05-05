@@ -1,8 +1,9 @@
-package spaceArkanoid.controller;
+package spaceArkanoid.controller.brick;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import spaceArkanoid.controller.ball.Ball;
 import spaceArkanoid.helper.GameEntity;
 import spaceArkanoid.helper.ReactToCol;
 import spaceArkanoid.service.State;
@@ -17,20 +18,28 @@ public class Brick implements GameEntity, ReactToCol {
 	
 	private spaceArkanoid.model.Brick model;
 	private State state = State.getState();
+	private BrickShadow shadow;
 	
 	public Brick(int pos_x, int pos_y) {
 		this();
 		
 		model.pos_x = pos_x;
 		model.pos_y = pos_y;
+		
+		shadow.updateShadow();
 	}
 	
 	public Brick() {
 		model = new spaceArkanoid.model.Brick();
 		state.registerEntity(this);
+		shadow = new BrickShadow(this);		
 	}
 
 	public void renderEntity(Graphics2D g2) {
+		// Draw the shadow first so it's below us.
+		shadow.render(g2);
+		
+		// Draw ourselves.
 		g2.setColor(new Color(50,100,50));
 		g2.fillRect(model.pos_x, model.pos_y, model.width, model.height);
 	}
@@ -72,7 +81,6 @@ public class Brick implements GameEntity, ReactToCol {
 	 * @param ball
 	 */
 	public void collidedWith(Ball ball) {
-		System.out.println("I WAS HIT OMG");
 		state.unregisterEntity(this);
 	}
 	

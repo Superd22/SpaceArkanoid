@@ -3,8 +3,8 @@ package spaceArkanoid.service;
 import java.util.ArrayList;
 
 import spaceArkanoid.Canvas;
-import spaceArkanoid.controller.Brick;
 import spaceArkanoid.controller.Raquette;
+import spaceArkanoid.controller.brick.Brick;
 import spaceArkanoid.helper.GameEntity;
 
 /**

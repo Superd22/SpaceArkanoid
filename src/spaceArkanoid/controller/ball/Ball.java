@@ -1,8 +1,9 @@
-package spaceArkanoid.controller;
+package spaceArkanoid.controller.ball;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import spaceArkanoid.controller.brick.Brick;
 import spaceArkanoid.helper.GameEntity;
 import spaceArkanoid.helper.ReactToCol;
 import spaceArkanoid.service.Collision;
@@ -19,9 +20,12 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 	private spaceArkanoid.model.Ball model;
 	private Object threadSuspended;
 	private double delta = 1d;
+	private boolean active;
 	
 	private State state = State.getState();
 	private Thread thread;
+	
+	private BallMotionBlur blur;
 	
 	public Ball(int pos_x, int pos_y) {
 		this();
@@ -34,6 +38,8 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 		model = new spaceArkanoid.model.Ball();
 		thread = new Thread(this);
 		state.registerEntity(this);
+		active = true;
+		blur = new BallMotionBlur(this);
 	}
 
 	public void run() {
@@ -85,18 +91,17 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 		 * so the ball can "fall" completely
 		 */
 		if(model.pos_y > 800) {
-			state.declareGameOver();
+			deRegister();
 			return;
 		}
 	}
 	
+
 	private void handleBarCollision() {
 			if(Collision.isThereCollision(model, state.getRaquette().getModel())) {
 				reverseDx();
 				reverseDy();
 			}
-			
-			
 	}
 	
 	private void bounce() {
@@ -105,6 +110,7 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 	}
 	
 	public void renderEntity(Graphics2D g2) {
+		blur.render(g2);
 		g2.setColor(new Color(255,10,10));
 		g2.fillOval(model.pos_x, model.pos_y, 20, 20);
 	}
@@ -132,6 +138,15 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 
 	public spaceArkanoid.model.Ball getModel() {
 		return model;
+	}
+	
+	private void deRegister() {
+		active = false;
+		state.unregisterEntity(this);
+	}
+	
+	public boolean isActive() {
+		return active;
 	}
 	
 }
