@@ -1,5 +1,9 @@
 
 spaceArkanoid
 spaceArkanoid.controller
+spaceArkanoid.controller.ball
+spaceArkanoid.controller.ball.sfx
+spaceArkanoid.controller.brick
+spaceArkanoid.helper
 spaceArkanoid.model
 spaceArkanoid.service
