@@ -44,7 +44,9 @@ public class BallMotionBlur  {
 		int i = 0;
 		for(BallTrailFade trail : trails) {
 			i++;
-			trail.render(g2);
+			synchronized(trail) {
+				trail.render(g2);
+			}
 		}
 	}
 	

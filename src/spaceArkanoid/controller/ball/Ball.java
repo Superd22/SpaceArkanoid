@@ -18,7 +18,6 @@ import spaceArkanoid.service.State;
 public class Ball implements Runnable, GameEntity, ReactToCol {
 	
 	private spaceArkanoid.model.Ball model;
-	private Object threadSuspended;
 	private double delta = 1d;
 	private boolean active;
 	

@@ -54,7 +54,7 @@ public class Game {
 	 */
 	public void gameLoop()	{
 	   long lastLoopTime = System.nanoTime();
-	   final int TARGET_FPS = 100;
+	   final int TARGET_FPS = 140;
 	   final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;   
 
 	   // keep looping round til the game ends
