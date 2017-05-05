@@ -1,11 +1,13 @@
 package spaceArkanoid.model;
 
+import spaceArkanoid.helper.GameEntityModel;
+
 /**
  * Defines the base Raquette model
  * @author David Fain
  *
  */
-public class Raquette {
+public class Raquette implements GameEntityModel {
 	/** the x position of the raquette */
 	public int pos_x = 200;
 	/** the y position of the raquette */

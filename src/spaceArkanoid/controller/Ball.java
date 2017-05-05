@@ -3,6 +3,8 @@ package spaceArkanoid.controller;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import spaceArkanoid.helper.GameEntity;
+import spaceArkanoid.helper.ReactToCol;
 import spaceArkanoid.service.Collision;
 import spaceArkanoid.service.State;
 
@@ -12,7 +14,7 @@ import spaceArkanoid.service.State;
  * @author David Fain
  *
  */
-public class Ball implements Runnable, GameEntity {
+public class Ball implements Runnable, GameEntity, ReactToCol {
 	
 	private spaceArkanoid.model.Ball model;
 	private Object threadSuspended;
@@ -20,6 +22,13 @@ public class Ball implements Runnable, GameEntity {
 	
 	private State state = State.getState();
 	private Thread thread;
+	
+	public Ball(int pos_x, int pos_y) {
+		this();
+		
+		model.pos_x = pos_x;
+		model.pos_y = pos_y;
+	}
 	
 	public Ball() {
 		model = new spaceArkanoid.model.Ball();
@@ -68,6 +77,8 @@ public class Ball implements Runnable, GameEntity {
 		handleBarCollision();
 		bounce();
 		
+		Collision.realizeBricksCollisionWith(this);
+		
 		/*
 		 * [GAME OVER]
 		 * Don't add model.height
@@ -81,10 +92,11 @@ public class Ball implements Runnable, GameEntity {
 	
 	private void handleBarCollision() {
 			if(Collision.isThereCollision(model, state.getRaquette().getModel())) {
-				System.out.println("ON THE BAR");
 				reverseDx();
 				reverseDy();
 			}
+			
+			
 	}
 	
 	private void bounce() {
@@ -106,6 +118,20 @@ public class Ball implements Runnable, GameEntity {
 
 	public void activate() {
 		thread.start();
+	}
+
+	public void collidedWith(Brick brick) {
+		reverseDx();
+		reverseDy();
+	}
+	
+	public void collidedWith(GameEntity entity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public spaceArkanoid.model.Ball getModel() {
+		return model;
 	}
 	
 }

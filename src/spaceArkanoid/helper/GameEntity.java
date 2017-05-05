@@ -1,6 +1,8 @@
-package spaceArkanoid.controller;
+package spaceArkanoid.helper;
 
 import java.awt.Graphics2D;
+
+import spaceArkanoid.controller.Ball;
 
 /**
  * Main interface for any GameEntity that is going to be rendered
@@ -23,4 +25,6 @@ public interface GameEntity {
 	public void updateEntity(double delta);
 
 	public void activate();
+	
+	public GameEntityModel getModel();
 }

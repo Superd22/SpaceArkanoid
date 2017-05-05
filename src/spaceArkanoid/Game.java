@@ -2,8 +2,7 @@ package spaceArkanoid;
 
 import javax.swing.JFrame;
 
-import spaceArkanoid.controller.Ball;
-import spaceArkanoid.controller.Raquette;
+import spaceArkanoid.controller.*;
 import spaceArkanoid.service.State;
 
 /**
@@ -34,8 +33,15 @@ public class Game {
 		canvas = new Canvas(frame);
 		
 		new Raquette();
-		for(int i = 0; i < 1; i++) 
+		for(int i = 0; i < 2; i++) 
 		      new Ball();
+		
+		for(int x = 0; x < 10; x++) {
+			for(int y = 0; y < 5; y++) {
+				new Brick(x*60, y*30);
+			}
+		}
+		
 		gameLoop();
 	}
 	
@@ -46,7 +52,7 @@ public class Game {
 	 */
 	public void gameLoop()	{
 	   long lastLoopTime = System.nanoTime();
-	   final int TARGET_FPS = 120;
+	   final int TARGET_FPS = 100;
 	   final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;   
 
 	   // keep looping round til the game ends

@@ -1,11 +1,13 @@
 package spaceArkanoid.model;
 
+import spaceArkanoid.helper.GameEntityModel;
+
 /**
  * Main model for a ball
  * @author David Fain
  *
  */
-public class Ball {
+public class Ball implements GameEntityModel {
 	
 	public int pos_x = (int) (Math.random()*500);
 	public int pos_y = (int) (Math.random()*500);

@@ -3,8 +3,9 @@ package spaceArkanoid.service;
 import java.util.ArrayList;
 
 import spaceArkanoid.Canvas;
-import spaceArkanoid.controller.GameEntity;
+import spaceArkanoid.controller.Brick;
 import spaceArkanoid.controller.Raquette;
+import spaceArkanoid.helper.GameEntity;
 
 /**
  * Singleton Service containing the actual state of the game
@@ -116,6 +117,21 @@ public class State {
 	
 	public ArrayList<GameEntity> getEntities() {
 		return entities;
+	}
+	
+	/**
+	 * Filters the registered entities and return all the bricks
+	 * @return the ArrayList of the registered bricks in the game.
+	 */
+	public ArrayList<Brick> getBrickEntities() {
+		ArrayList<Brick> result = new ArrayList<Brick>();
+		for(int i = 0; i < entities.size(); i++) {
+			if(entities.get(i) instanceof Brick) {
+				result.add((Brick) entities.get(i));
+			}
+		}
+		
+		return result;		
 	}
 	
 	/**

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import spaceArkanoid.controller.GameEntity;
+import spaceArkanoid.helper.GameEntity;
 import spaceArkanoid.service.State;
 
 /**
