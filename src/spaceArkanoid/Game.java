@@ -68,6 +68,9 @@ public class Game {
 	      lastLoopTime = now;
 	      double delta = updateLength / ((double)OPTIMAL_TIME);
 
+	      // Update the state
+	      state.setCurrentTime(now);
+	      
 	      // update the frame counter
 	      lastFpsTime += updateLength;
 	      fps++;

@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 
 import spaceArkanoid.controller.ball.sfx.BallTrailFade;
 import spaceArkanoid.helper.OldVelocities;
+import spaceArkanoid.service.State;
 
 /**
  * Helper class to display a motion blur "trail"
@@ -13,32 +14,30 @@ import spaceArkanoid.helper.OldVelocities;
  * @author David Fain
  *
  */
-public class BallMotionBlur implements Runnable  {
+public class BallMotionBlur  {
 	
 	/** reference to our ball */
 	private Ball ball;
 	private LinkedList<BallTrailFade> trails = new LinkedList<BallTrailFade>();
+	private long lastAdded = 0l;
+	/** time in ms between trails */
+	private int addDelay = 1;
 	
 	
 	BallMotionBlur(Ball ball) {
 		this.ball = ball;
-		new Thread(this).start();;
 	}
 	
-	public void run() {
-		while(ball.isActive()) {
-			
-			if(trails.size() < 20) {
-				trails.addFirst(new BallTrailFade(this));
-			}
-			
-			try {
-				Thread.sleep(5);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	public void update(double delta) {
+		if(trails.size() < 100 && State.getState().getCurrentTime() >= lastAdded + (addDelay * 1000)) {
+			trails.addFirst(new BallTrailFade(this));
+			lastAdded = State.getState().getCurrentTime();
 		}
+
+		for(BallTrailFade trail : trails) {
+			trail.update(delta);
+		}
+		
 	}
 
 	public void render(Graphics2D g2) {

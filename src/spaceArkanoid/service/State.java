@@ -26,6 +26,8 @@ public class State {
 	private ArrayList<GameEntity> entities = new ArrayList<GameEntity>();
 	/** The current bar */
 	private Raquette bar;
+	/** curent nano second time for this frame (calculated at the start of the gameloop) */
+	private long currentTime;
 	
 	/** Holder */
 	private static class StateHolder {
@@ -149,6 +151,20 @@ public class State {
 
 	public Raquette getRaquette() {
 		return bar;
+	}
+
+	/**
+	 * @return the currentTime
+	 */
+	public long getCurrentTime() {
+		return currentTime;
+	}
+
+	/**
+	 * @param currentTime the currentTime to set
+	 */
+	public void setCurrentTime(long currentTime) {
+		this.currentTime = currentTime;
 	}
 	
 	

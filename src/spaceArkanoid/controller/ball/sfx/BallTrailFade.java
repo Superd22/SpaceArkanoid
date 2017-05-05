@@ -5,13 +5,14 @@ import java.awt.Graphics2D;
 
 import spaceArkanoid.controller.ball.Ball;
 import spaceArkanoid.controller.ball.BallMotionBlur;
+import spaceArkanoid.service.State;
 
 /**
  * An oval trail for the ball
  * @author David Fain
  *
  */
-public class BallTrailFade implements Runnable {
+public class BallTrailFade {
 	private int x;
 	private int y;
 	private int dx;
@@ -19,8 +20,9 @@ public class BallTrailFade implements Runnable {
 	private long timer;
 	private final int width;
 	private final int height;
-	private float opacity;
-	private static final int delay = 500;
+	private float opacity = 0.9f;
+	/** delay in ms we're supposed to be alive for */
+	private static final int delay = 50;
 	private BallMotionBlur blur;
 	
 	
@@ -35,23 +37,27 @@ public class BallTrailFade implements Runnable {
 		width = bModel.width;
 		height = bModel.height;
 		
-		timer = System.currentTimeMillis();
+		timer = State.getState().getCurrentTime();
 		
-		// Launch the animation
-		new Thread(this).start();
 	}
 	
-	public void run() {
-		while(System.currentTimeMillis() < timer + delay) {
-			opacity = (float) (1 - System.currentTimeMillis() / (timer + delay));
-			Thread.yield();
-		}
-		blur.removeDeadTrail();
-	}
 	
 	public void render(Graphics2D g2) {
-		g2.setColor(new Color(1f,0.1f,0.1f,opacity));
-		g2.fillOval(x, y, (int) (width + dx*0.2), (int) (height + dy*0.2));
+		
+		g2.setColor(new Color(0.9f,0.1f,0.1f,opacity));
+		g2.fillOval(x, y, width, height);
+		
+		if(opacity <= 0.0f) {
+			blur.removeDeadTrail();
+		}
+	}
+
+	public void update(double delta) {
+		opacity -= delta*0.1;
+		if(opacity < 0) opacity = 0;
 	}
 	
+	private double get_divider() {
+		return (double) (( timer + ( delay * 1000000)));
+	}
 }

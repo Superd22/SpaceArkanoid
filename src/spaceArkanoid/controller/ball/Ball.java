@@ -36,10 +36,10 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 	
 	public Ball() {
 		model = new spaceArkanoid.model.Ball();
+		blur = new BallMotionBlur(this);
 		thread = new Thread(this);
 		state.registerEntity(this);
 		active = true;
-		blur = new BallMotionBlur(this);
 	}
 
 	public void run() {
@@ -54,6 +54,7 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 	
 	private void updateModel() throws InterruptedException {
 		synchronized(model) {
+			blur.update(delta);
 			moveBall();
 			handleCollisions();
 			model.wait();
@@ -118,7 +119,7 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 	public void updateEntity(double delta) {
 		this.delta = delta;
 		synchronized(model) {
-				model.notify();
+			model.notify();
 		}
 	}
 
