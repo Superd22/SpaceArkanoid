@@ -12,4 +12,12 @@ public class Brick implements GameEntityModel {
 	public final int width = 50;
 	public final int height = 20;
 	
+	public int getDx() {
+		return 0;
+	}
+	
+	public int getDy() {
+		return 0;
+	}
+	
 }

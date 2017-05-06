@@ -83,6 +83,12 @@ public class Brick implements GameEntity, ReactToCol {
 	public void collidedWith(Ball ball) {
 		state.unregisterEntity(this);
 	}
+
+	@Override
+	public void deactivate() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

@@ -1,6 +1,7 @@
 package spaceArkanoid.controller.ball;
 
 import java.awt.Graphics2D;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map.Entry;
 
@@ -41,13 +42,10 @@ public class BallMotionBlur  {
 	}
 
 	public void render(Graphics2D g2) {
-		int i = 0;
-		for(BallTrailFade trail : trails) {
-			i++;
-			synchronized(trail) {
-				trail.render(g2);
+			for(Iterator<BallTrailFade> iter = trails.iterator(); iter.hasNext();) {
+				BallTrailFade trail = iter.next();
+					trail.render(g2);
 			}
-		}
 	}
 	
 	public void removeDeadTrail() {

@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 
 import spaceArkanoid.controller.brick.Brick;
 import spaceArkanoid.helper.GameEntity;
+import spaceArkanoid.helper.GameEntityModel;
 import spaceArkanoid.helper.ReactToCol;
 import spaceArkanoid.service.Collision;
 import spaceArkanoid.service.State;
@@ -99,10 +100,33 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 
 	private void handleBarCollision() {
 			if(Collision.isThereCollision(model, state.getRaquette().getModel())) {
-				reverseDx();
-				reverseDy();
+				
+				//reverseDy();
+				frictionCollision(state.getRaquette().getModel());
 			}
 	}
+	
+	private void perfectCollision() {
+		reverseDx();
+		reverseDy();
+	}
+	
+	private void frictionCollision(GameEntityModel gm) {
+		synchronized(model) {
+			// Get our reverse
+			int nextDX = (int) model.dx;
+			int nextDY = (int) - model.dy;
+			
+			synchronized(gm) {
+				System.out.println(gm.getDx());
+				model.dx = nextDX + gm.getDx()/20 ;
+			}
+			
+			model.dy = nextDY;
+		}
+	}
+	
+
 	
 	private void bounce() {
 		if(model.pos_x + model.width >= 500 || model.pos_x <= 0) reverseDx();
@@ -127,7 +151,8 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 	}
 
 	public void collidedWith(Brick brick) {
-		reverseDx();
+		//reverseDx();
+		
 		reverseDy();
 	}
 	
@@ -147,6 +172,12 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 	
 	public boolean isActive() {
 		return active;
+	}
+
+	@Override
+	public void deactivate() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

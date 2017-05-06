@@ -26,7 +26,15 @@ public class Raquette implements GameEntity {
 	private MouseMotionListener mouseListener = new MouseMotionListener(){
 		public void mouseDragged(MouseEvent e) {}
 		public void mouseMoved(MouseEvent e) {
-			model.pos_x = e.getX()-(model.width/2);
+			synchronized(model) {
+				int newX = e.getX()-(model.width/2);
+				int dx= (int) (((newX - model.pos_x)/(double) (state.getCurrentTime())) * Math.pow(10, 15));
+				if(dx > 100) dx = 100;
+				if(dx < -100) dx = -100;
+				
+				model.pos_x = newX;
+				model.dx = dx;
+			}
 		}
 	};
 	

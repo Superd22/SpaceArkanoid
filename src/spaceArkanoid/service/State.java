@@ -122,6 +122,18 @@ public class State {
 	}
 	
 	/**
+	 * Will remove all the entities we currently hold
+	 */
+	public void cleanAllEntities() {
+		
+		// Clean-up to be sure we can garbage collect everything
+		for(GameEntity ent : entities) 
+			ent.deactivate();
+		
+		entities.clear();
+	}
+	
+	/**
 	 * Filters the registered entities and return all the bricks
 	 * @return the ArrayList of the registered bricks in the game.
 	 */

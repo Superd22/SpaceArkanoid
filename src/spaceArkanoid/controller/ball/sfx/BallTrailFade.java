@@ -30,13 +30,15 @@ public class BallTrailFade {
 	}
 	
 	
-	public synchronized void render(Graphics2D g2) {
+	public void render(Graphics2D g2) {
 		
 		g2.setColor(new Color(0.9f,0.1f,0.1f,opacity));
 		g2.fillOval(x, y, width, height);
 		
 		if(opacity <= 0.0f) {
-			blur.removeDeadTrail();
+			synchronized(blur) {
+				blur.removeDeadTrail();
+			}
 		}
 	}
 

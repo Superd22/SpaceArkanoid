@@ -16,4 +16,15 @@ public class Raquette implements GameEntityModel {
 	public int width = 100;
 	/** height of the raquette */
 	public int height = 20;
+	
+	public int dx;
+	public int dy;
+
+	public int getDx() {
+		return dx;
+	}
+
+	public int getDy() {
+		return dy;
+	}
 }

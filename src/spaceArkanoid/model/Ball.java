@@ -18,5 +18,13 @@ public class Ball implements GameEntityModel {
 	public int width = 20;
 	public int height = 20;
 	
+	public int getDx() {
+		return (int) dx;
+	}
+
+	public int getDy() {
+		return (int) dy;
+	}
+	
 	
 }

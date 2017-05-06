@@ -24,7 +24,21 @@ public interface GameEntity {
 	 */
 	public void updateEntity(double delta);
 
+	/**
+	 * Responsible for "activating" the entity and its proper
+	 * gameplay features (listeners for example)
+	 */
 	public void activate();
 	
+	/**
+	 * Responsible for "de-activating" the entity,
+	 * used for pause / game-over and deleting of this entity
+	 */
+	public void deactivate();
+	
+	/**
+	 * Convenience method to get the model attached to this entity
+	 * @return the model of the entity
+	 */
 	public GameEntityModel getModel();
 }
