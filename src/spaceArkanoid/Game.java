@@ -33,16 +33,9 @@ public class Game {
 	public Game(JFrame frame) {
 		mainFrame = frame;
 		canvas = new Canvas(frame);
+		state.registerWindow(frame);
 		
-		new Raquette();
-		for(int i = 0; i < 2; i++) 
-		      new Ball();
-		
-		for(int x = 0; x < 10; x++) {
-			for(int y = 0; y < 5; y++) {
-				new Brick(x*60, y*30);
-			}
-		}
+		new Level(0);
 		
 		gameLoop();
 	}

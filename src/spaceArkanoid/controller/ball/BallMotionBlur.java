@@ -3,10 +3,8 @@ package spaceArkanoid.controller.ball;
 import java.awt.Graphics2D;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Map.Entry;
 
 import spaceArkanoid.controller.ball.sfx.BallTrailFade;
-import spaceArkanoid.helper.OldVelocities;
 import spaceArkanoid.service.State;
 
 /**

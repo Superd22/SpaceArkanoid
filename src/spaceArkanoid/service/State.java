@@ -2,6 +2,8 @@ package spaceArkanoid.service;
 
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+
 import spaceArkanoid.Canvas;
 import spaceArkanoid.controller.Raquette;
 import spaceArkanoid.controller.brick.Brick;
@@ -20,6 +22,8 @@ public class State {
 	private boolean gamePaused = false;
 	/** if we're in splash screen (start of the game) */
 	private boolean gameSplash = false;
+	/** main frame for the game */
+	private JFrame frame;
 	/** our game canvas */
 	private Canvas canvas;
 	/** the array of all the entities we're managning */
@@ -28,6 +32,9 @@ public class State {
 	private Raquette bar;
 	/** curent nano second time for this frame (calculated at the start of the gameloop) */
 	private long currentTime;
+	/** numbers of balls in play (0 = gameOver) */
+	private int ballCount;
+	
 	
 	/** Holder */
 	private static class StateHolder {
@@ -66,6 +73,24 @@ public class State {
 	public void registerCanvas(Canvas cv) {
 		canvas = cv;
 	}
+	
+	/**
+	 * Register the main game window
+	 * @param frame
+	 */
+	public void registerWindow(JFrame frame) {
+		this.frame = frame;
+	}
+	
+	/**
+	 * Getter for frame
+	 * @return frame
+	 */
+	public JFrame getFrame() {
+		return frame;
+	}
+	
+	
 	
 	/**
 	 * Convenience function to get the game canvas
@@ -177,6 +202,13 @@ public class State {
 	 */
 	public void setCurrentTime(long currentTime) {
 		this.currentTime = currentTime;
+	}
+
+	/**
+	 * Sets the ball count to zero
+	 */
+	public void resetBallCount() {
+		ballCount = 0;		
 	}
 	
 	

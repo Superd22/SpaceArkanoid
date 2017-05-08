@@ -55,7 +55,6 @@ public class Brick implements GameEntity, ReactToCol {
 	 * Nothing to do rn
 	 */
 	public void activate() {
-		// TODO Auto-generated method stub
 		
 	}
 	
