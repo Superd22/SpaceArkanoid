@@ -9,8 +9,8 @@ public class Brick implements GameEntityModel {
 	public int pos_y = (int) (Math.random()*100);
 	public Color mainColor;
 	
-	public final int width = 50;
-	public final int height = 20;
+	public final int width = 70;
+	public final int height = 30;
 	
 	public int getDx() {
 		return 0;
@@ -20,4 +20,19 @@ public class Brick implements GameEntityModel {
 		return 0;
 	}
 	
+	public int getPosX() {
+		return pos_x;
+	}
+
+	public int getPosY() {
+		return pos_y;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
 }

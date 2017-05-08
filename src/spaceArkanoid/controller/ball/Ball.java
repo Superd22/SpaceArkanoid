@@ -2,6 +2,7 @@ package spaceArkanoid.controller.ball;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 
 import spaceArkanoid.controller.brick.Brick;
 import spaceArkanoid.helper.GameEntity;
@@ -39,7 +40,6 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 		blur = new BallMotionBlur(this);
 		thread = new Thread(this);
 		state.registerEntity(this);
-		active = true;
 	}
 
 	public void run() {
@@ -150,10 +150,36 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 		thread.start();
 	}
 
-	public void collidedWith(Brick brick) {
-		//reverseDx();
+	/**
+	 * Triggered when this ball just collided with a brick
+	 * @param brick the brick we just hit.
+	 * @param shapeIntersection 
+	 */
+	public void collidedWith(Brick brick, Rectangle2D shapeIntersection) {
+		// First order of business is figuring out the direction of the collision.
+		Rectangle2D shapeBall = new Rectangle2D.Double(model.pos_x, model.pos_y, model.width, model.height);
 		
-		reverseDy();
+		// Perfect Left/Right collision
+		if(shapeBall.getHeight() == shapeIntersection.getHeight()) {
+			reverseDx();
+		}
+		
+		// Perfect top/bottom collision
+		else if(shapeBall.getWidth() == shapeIntersection.getWidth()) {
+			reverseDy();
+		}
+		else {
+			/*int height = (int) shapeIntersection.getHeight() + 1;
+			int width = (int) shapeIntersection.getWidth() + 1;
+			
+			model.dx = - ( height / width ) * model.dx;
+			model.dy = - ( width / height ) * model.dy;*/
+
+			reverseDx();
+			reverseDy();
+			
+		}
+		
 	}
 	
 	public void collidedWith(GameEntity entity) {

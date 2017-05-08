@@ -3,6 +3,7 @@ package spaceArkanoid.controller.ball;
 import java.awt.Graphics2D;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.concurrent.LinkedBlockingDeque;
 
 import spaceArkanoid.controller.ball.sfx.BallTrailFade;
 import spaceArkanoid.service.State;
@@ -17,7 +18,7 @@ public class BallMotionBlur  {
 	
 	/** reference to our ball */
 	private Ball ball;
-	private LinkedList<BallTrailFade> trails = new LinkedList<BallTrailFade>();
+	private LinkedBlockingDeque<BallTrailFade> trails = new LinkedBlockingDeque<BallTrailFade>();
 	private long lastAdded = 0l;
 	/** time in ms between trails */
 	private int addDelay = 1;
@@ -40,18 +41,14 @@ public class BallMotionBlur  {
 	}
 
 	public void render(Graphics2D g2) {
-		synchronized(trails) {
 			for(Iterator<BallTrailFade> iter = trails.iterator(); iter.hasNext();) {
 				BallTrailFade trail = iter.next();
-					trail.render(g2);
+				trail.render(g2);
 			}
-		}
 	}
 	
 	public void removeDeadTrail() {
-		synchronized(trails) {
-			trails.removeLast();
-		}
+		trails.removeLast();
 	}
 	
 	public Ball getBall() {

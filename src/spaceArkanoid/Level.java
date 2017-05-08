@@ -16,8 +16,8 @@ import spaceArkanoid.service.State;
 public class Level {
 	
 	private State state = State.getState();
-	private int width=500;
-	private int height= 700;
+	private int width = 500;
+	private int height = 700;
 	
 	
 	/**
@@ -30,10 +30,12 @@ public class Level {
 		
 		for(int x = 0; x < 10; x++) {
 			for(int y = 0; y < 5; y++) {
-				new Brick(x*50, y*30);
+				new Brick(x*75, y*35);
 			}
 		}
 	}
+	
+	
 	
 	/**
 	 * Clean up the state of all we had in this level

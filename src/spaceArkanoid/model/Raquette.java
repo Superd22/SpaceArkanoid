@@ -27,4 +27,20 @@ public class Raquette implements GameEntityModel {
 	public int getDy() {
 		return dy;
 	}
+	
+	public int getPosX() {
+		return pos_x;
+	}
+
+	public int getPosY() {
+		return pos_y;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
 }

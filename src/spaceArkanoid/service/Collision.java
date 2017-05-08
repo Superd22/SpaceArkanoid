@@ -4,6 +4,7 @@ import java.awt.Shape;
 import java.awt.geom.*;
 import java.util.ArrayList;
 
+import spaceArkanoid.helper.GameEntity;
 import spaceArkanoid.model.Ball;
 import spaceArkanoid.model.Brick;
 import spaceArkanoid.model.Raquette;
@@ -14,6 +15,9 @@ import spaceArkanoid.model.Raquette;
  *
  */
 public class Collision {
+	public static final int COLLISION_PERFECT_TOP_OR_BOTTOM = 0;
+	public static final int COLLISION_PERFECT_LEFT_OR_RIGHT = 1;
+	public static final int COLLISION_CORNER = 2;
 	
 	/**
 	 * Convenience function to check for colision between the ball and a bar
@@ -42,10 +46,20 @@ public class Collision {
 	 * @return if we have a col.
 	 */
 	public static boolean testIntersection(Shape shapeA, Shape shapeB) {
+		return !getIntersection(shapeA,shapeB).isEmpty();
+	}
+	
+	/**
+	 * Returns the intersecting area between ShapeA and ShapeB
+	 * @param shapeA
+	 * @param shapeB
+	 * @return the intersecting area
+	 */
+	public static Area getIntersection(Shape shapeA, Shape shapeB) {
 		Area areaA = new Area(shapeA);
 		areaA.intersect(new Area(shapeB));
 		
-		return !areaA.isEmpty();
+		return areaA;
 	}
 	
 	/**
@@ -56,7 +70,7 @@ public class Collision {
 	 */
 	public static boolean isThereCollision(Ball ball, Brick brick) {
 		Shape shapeA = new Rectangle2D.Double(brick.pos_x, brick.pos_y, brick.width, brick.height); 
-		Shape shapeB = new Ellipse2D.Double(ball.pos_x, ball.pos_y, ball.width, ball.height);
+		Shape shapeB = new Rectangle2D.Double(ball.pos_x, ball.pos_y, ball.width, ball.height);
 
 		return Collision.testIntersection(shapeA, shapeB);
 	}
@@ -70,18 +84,20 @@ public class Collision {
 		State state = State.getState();
 		Ball ball = ballController.getModel();
 		ArrayList<spaceArkanoid.controller.brick.Brick> bricks = state.getBrickEntities();
-		Shape shapeB = new Ellipse2D.Double(ball.pos_x, ball.pos_y, ball.width, ball.height);
+		Shape shapeB = new Rectangle2D.Double(ball.pos_x, ball.pos_y, ball.width, ball.height);
 		
 		for(int i = 0; i < bricks.size(); i++) {
 			Brick brick = bricks.get(i).getModel();
-			Shape shapeA = new Rectangle2D.Double(brick.pos_x, brick.pos_y, brick.width, brick.height); 
+			Rectangle2D shapeA = new Rectangle2D.Double(brick.pos_x, brick.pos_y, brick.width, brick.height); 
 			
 			if(Collision.testIntersection(shapeA, shapeB)) {
+				Rectangle2D shapeIntersection = getIntersection(shapeA, shapeB).getBounds2D();
 				bricks.get(i).collidedWith(ballController);
-				ballController.collidedWith(bricks.get(i));
+				ballController.collidedWith(bricks.get(i), shapeIntersection);
 			}
 			
 		}
 		
 	}
+
 }
