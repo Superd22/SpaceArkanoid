@@ -42,14 +42,18 @@ public class BallMotionBlur  {
 	}
 
 	public void render(Graphics2D g2) {
+		synchronized(trails) {
 			for(Iterator<BallTrailFade> iter = trails.iterator(); iter.hasNext();) {
 				BallTrailFade trail = iter.next();
 					trail.render(g2);
 			}
+		}
 	}
 	
 	public void removeDeadTrail() {
-		trails.removeLast();
+		synchronized(trails) {
+			trails.removeLast();
+		}
 	}
 	
 	public Ball getBall() {
