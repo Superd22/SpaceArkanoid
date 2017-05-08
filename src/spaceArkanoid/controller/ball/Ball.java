@@ -22,7 +22,6 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 	private spaceArkanoid.model.Ball model;
 	private double delta = 1d;
 	private boolean active;
-	
 	private State state = State.getState();
 	private Thread thread;
 	
@@ -204,6 +203,20 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 	public void deactivate() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	/**
+	 * Declare this ball as a first ball of the level,
+	 * will stick to the bar and follows it until triggered 
+	 */
+	public void setFirstBall() {
+		state.getRaquette().attachBall(this);
+		
+	}
+
+	public void move(int x, int y) {
+		model.pos_x = x;
+		model.pos_y = y;
 	}
 	
 }

@@ -19,6 +19,9 @@ public class Raquette implements GameEntityModel {
 	
 	public int dx;
 	public int dy;
+	
+	/** max number of balls that can wait on this bar */
+	public int maxBalls = 3;
 
 	public int getDx() {
 		return dx;

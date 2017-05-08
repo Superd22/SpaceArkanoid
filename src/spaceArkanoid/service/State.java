@@ -124,8 +124,6 @@ public class State {
 		synchronized(entities) {
 			entities.add(entity);
 		}
-		
-		entity.activate();
 	}
 	
 

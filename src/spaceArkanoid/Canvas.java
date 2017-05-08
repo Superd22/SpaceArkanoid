@@ -20,7 +20,6 @@ import spaceArkanoid.service.State;
  *
  */
 public class Canvas extends JPanel {
-	
 	private State state = State.getState();
 	private JFrame mainFrame;
 	
@@ -30,8 +29,7 @@ public class Canvas extends JPanel {
 		
 		mainFrame.add(this);
 		setVisible(true);
-		requestFocus();   
-
+		requestFocus();
 		
 		state.registerCanvas(this);
 	}

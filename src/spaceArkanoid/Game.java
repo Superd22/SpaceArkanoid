@@ -36,7 +36,6 @@ public class Game {
 		state.registerWindow(frame);
 		
 		new Level(0);
-		
 		gameLoop();
 	}
 	

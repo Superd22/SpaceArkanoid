@@ -1,12 +1,10 @@
 package spaceArkanoid;
 
-import java.util.ArrayList;
-
 import spaceArkanoid.controller.Raquette;
 import spaceArkanoid.controller.ball.Ball;
 import spaceArkanoid.controller.brick.Brick;
-import spaceArkanoid.helper.GameEntity;
 import spaceArkanoid.service.State;
+import spaceArkanoid.ui.NewLevelOverlay;
 
 /**
  * Main class for generating a level
@@ -16,23 +14,33 @@ import spaceArkanoid.service.State;
 public class Level {
 	
 	private State state = State.getState();
+	private Raquette bar;
 	private int width = 500;
 	private int height = 700;
-	
+	private NewLevelOverlay nOverlay;
 	
 	/**
 	 * Creates a new level
 	 * @param n level difficulty/number
 	 */
 	public Level(int n) {
-		new Raquette();
-		new Ball();
+		bar = new Raquette();
+		
+		new Ball().setFirstBall();
 		
 		for(int x = 0; x < 10; x++) {
 			for(int y = 0; y < 5; y++) {
 				new Brick(x*75, y*35);
 			}
 		}
+		
+		nOverlay = new NewLevelOverlay(this);
+		setOverlay();
+		nOverlay.setVisible(true);
+	}
+	
+	private void setOverlay() {
+		state.getFrame().setGlassPane(nOverlay);
 	}
 	
 	
@@ -43,6 +51,11 @@ public class Level {
 	public void cleanUp() {
 		state.cleanAllEntities();	
 		state.resetBallCount();
+	}
+	
+	
+	public void activateLevel() {
+		bar.activate();
 	}
 	
 }
