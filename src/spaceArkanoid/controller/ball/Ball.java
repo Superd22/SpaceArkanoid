@@ -118,7 +118,7 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 			
 			synchronized(gm) {
 				System.out.println(gm.getDx());
-				model.dx = nextDX + gm.getDx()/20 ;
+				model.dx = nextDX + gm.getDx()/50 ;
 			}
 			
 			model.dy = nextDY;

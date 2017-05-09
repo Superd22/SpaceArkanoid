@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import spaceArkanoid.Canvas;
+import spaceArkanoid.Level;
 import spaceArkanoid.controller.Raquette;
+import spaceArkanoid.controller.ball.Ball;
 import spaceArkanoid.controller.brick.Brick;
 import spaceArkanoid.helper.GameEntity;
 
@@ -34,6 +36,7 @@ public class State {
 	private long currentTime;
 	/** numbers of balls in play (0 = gameOver) */
 	private int ballCount;
+	private Level currentLevel;
 	
 	
 	/** Holder */
@@ -116,6 +119,11 @@ public class State {
 		registerEntity((GameEntity) entity);
 	}
 	
+	public void registerEntity(Ball ball) {
+		ballCount++;
+		registerEntity((GameEntity) ball);
+	}
+	
 	/** 
 	 * Register an entity for update
 	 * @param entity the entity to register
@@ -132,12 +140,17 @@ public class State {
 	 * @param entity the entity to unregister
 	 */
 	public void unregisterEntity(GameEntity entity) {
-		for(int i = 0; i < entities.size(); i++) {
-			if(entities.get(i) == entity) {
-				entities.remove(i);
-				break;
-			}
+		synchronized(entities) {
+			entities.remove(entity);
 		}
+	}
+	
+	public void unregisterEntity(Ball ball) {
+		ballCount--;
+		unregisterEntity((GameEntity) ball);
+		
+		/** @todo should we abstract some game over logic directly in the state ? */
+		if(ballCount <= 0) currentLevel.gameOver();
 	}
 	
 	public ArrayList<GameEntity> getEntities() {
@@ -207,6 +220,10 @@ public class State {
 	 */
 	public void resetBallCount() {
 		ballCount = 0;		
+	}
+
+	public void registerCurrentLevel(Level level) {
+		currentLevel = level;		
 	}
 	
 	

@@ -50,7 +50,7 @@ public class Canvas extends JPanel {
 	    
 		ArrayList<GameEntity> entities = state.getEntities();
 		for(int i = 0; i< entities.size(); i++) {
-			entities.get(i).renderEntity(g2);
+			if(entities.get(i) != null) entities.get(i).renderEntity(g2);
 		}
 	}
 	
