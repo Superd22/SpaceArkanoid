@@ -24,7 +24,7 @@ public class Brick implements GameEntity, ReactToCol {
 		this();
 		
 		model.pos_x = pos_x;
-		model.pos_y = pos_y;
+		model.pos_y = pos_y + 50;
 		
 		shadow.updateShadow();
 	}

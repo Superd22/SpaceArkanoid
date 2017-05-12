@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import spaceArkanoid.helper.GameEntity;
 import spaceArkanoid.service.State;
+import spaceArkanoid.ui.hud.MainHUD;
 
 /**
  * Main Game Canvas, responsible for:
@@ -22,6 +23,8 @@ import spaceArkanoid.service.State;
 public class Canvas extends JPanel {
 	private State state = State.getState();
 	private JFrame mainFrame;
+	private MainHUD hud = new MainHUD(this);
+	
 	
 	public Canvas(JFrame frame) {
 		mainFrame = frame;
@@ -30,7 +33,9 @@ public class Canvas extends JPanel {
 		mainFrame.add(this);
 		setVisible(true);
 		requestFocus();
-		
+
+	    setLayout(null);
+	    
 		state.registerCanvas(this);
 	}
 	
@@ -48,10 +53,17 @@ public class Canvas extends JPanel {
 	             RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 	    g2.setRenderingHints(rh);
 	    
+	    paintUI(g2);
+	    
+	    
 		ArrayList<GameEntity> entities = state.getEntities();
 		for(int i = 0; i< entities.size(); i++) {
 			if(entities.get(i) != null) entities.get(i).renderEntity(g2);
 		}
+	}
+	
+	public void paintUI(Graphics2D g2) {
+		hud.render(g2);
 	}
 	
 	

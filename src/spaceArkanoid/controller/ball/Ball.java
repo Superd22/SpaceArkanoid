@@ -74,7 +74,9 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 	
 	private void reverseDy() {
 		synchronized(model) {
+			System.out.println("reverse");
 			model.dy = -model.dy;
+			System.out.println(model.dy);
 		}
 	}
 	
@@ -90,7 +92,7 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 		 * Don't add model.height
 		 * so the ball can "fall" completely
 		 */
-		if(model.pos_y > 800) {
+		if(model.pos_y > 850) {
 			deRegister();
 			return;
 		}
@@ -127,9 +129,16 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 	
 
 	
-	private void bounce() {
-		if(model.pos_x + model.width >= 500 || model.pos_x <= 0) reverseDx();
-		if(model.pos_y + model.height < 0) reverseDy();		
+	private synchronized void bounce() {
+		System.out.println(model.pos_y);
+		if(model.pos_x + model.width >= 500 || model.pos_x <= 0) {
+			if(		model.pos_x <= 0 && model.dx <= 0 ||
+					model.pos_x + model.width >= 500 && model.dx >=0
+			) reverseDx();
+		}
+		if(model.pos_y <= 50) {
+			if(model.dy <= 0) reverseDy();
+		}
 	}
 	
 	public void renderEntity(Graphics2D g2) {

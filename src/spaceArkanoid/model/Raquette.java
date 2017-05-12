@@ -11,7 +11,7 @@ public class Raquette implements GameEntityModel {
 	/** the x position of the raquette */
 	public int pos_x = 200;
 	/** the y position of the raquette */
-	public int pos_y = 700;
+	public int pos_y = 750;
 	/** width of the raquette */
 	public int width = 100;
 	/** height of the raquette */
