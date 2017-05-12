@@ -58,15 +58,19 @@ public class Level {
 
 		new Ball().setFirstBall();
 		
-		for(int x = 0; x < (level+1)*2; x++) {
-			for(int y = 0; y < 2; y++) {
-				new Brick(x*75, y*35);
+		int i = 0;
+		for(int x = 0; x < 10; x++) {
+			for(int y = 0; y < 6; y++) {
+				if(i > (level+1)*11) break;
+				int rand = (int) (Math.random() * 100);
+				if(rand > 90) new BrickBallSpawner((y*80)+6, (x*40)+5);
+				else if (rand > 95) new BrickEnlarger((y*80)+6, (x*40)+5);
+				else new Brick((y*80)+6, (x*40)+5 );
+				i++;				
 			}
 		}
 		
 		
-		new BrickBallSpawner(250,250);
-		new BrickEnlarger(270,200);
 		
 	}
 	

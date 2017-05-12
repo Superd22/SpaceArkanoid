@@ -12,6 +12,11 @@ import spaceArkanoid.Canvas;
 import spaceArkanoid.service.State;
 import spaceArkanoid.ui.helper.SmoothLabel;
 
+/**
+ * Main class for the HUD displayed on top of the canvas
+ * @author David Fain
+ *
+ */
 public class MainHUD {
 	private static final Color bgColor = new Color(37,37,37);
 	private static final Color fontColor = new Color(200,200,200);

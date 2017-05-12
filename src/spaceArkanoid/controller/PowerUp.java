@@ -8,6 +8,11 @@ import spaceArkanoid.helper.GameEntityModel;
 import spaceArkanoid.service.Collision;
 import spaceArkanoid.service.State;
 
+/**
+ * Class for the power-up, subject to gravity, that on colision with the bar will enlarge the latter.
+ * @author David Fain
+ *
+ */
 public class PowerUp implements GameEntity {
 	public int x;
 	public int y;

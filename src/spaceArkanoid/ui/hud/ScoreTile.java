@@ -3,6 +3,11 @@ package spaceArkanoid.ui.hud;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+/**
+ * Helper class to display the score tiles on the hud
+ * @author David Fain
+ *
+ */
 public class ScoreTile {
 	private static final Color bgColor = new Color(41,41,41);
 	private static final Color borderColor = new Color(63,63,63);

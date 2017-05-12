@@ -4,6 +4,13 @@ import java.awt.Color;
 
 import spaceArkanoid.controller.ball.Ball;
 
+/**
+ * Class to handle a brick that will spawn a ball on collision
+ * 
+ * @see Brick
+ * @author David Fain
+ *
+ */
 public class BrickBallSpawner extends Brick {
 
 	public BrickBallSpawner() {
@@ -22,6 +29,7 @@ public class BrickBallSpawner extends Brick {
 
 	public void collidedWith(Ball ball) {
 		super.collidedWith(ball);
+		state.addScore(10);
 		new Ball(model.pos_x + model.width/2, model.pos_y + model.height).activate();
 	}
 	
