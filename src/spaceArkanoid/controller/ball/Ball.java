@@ -154,7 +154,7 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 	 * @param brick the brick we just hit.
 	 * @param shapeIntersection 
 	 */
-	public void collidedWith(Brick brick, Rectangle2D shapeIntersection) {
+	public synchronized void collidedWith(Brick brick, Rectangle2D shapeIntersection) {
 		// First order of business is figuring out the direction of the collision.
 		Rectangle2D shapeBall = new Rectangle2D.Double(model.pos_x, model.pos_y, model.width, model.height);
 		

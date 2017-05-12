@@ -40,7 +40,6 @@ public class NewLevelOverlay extends JPanel {
 	public NewLevelOverlay(Level level) {
 		this.level = level;
 		setBackground(new Color(0.9f, 0.9f, 0.9f, 0.8f));
-		setSize(500, 500);
 		
 		
 		File font_file = new File("assets/BankGothicBold.ttf");
