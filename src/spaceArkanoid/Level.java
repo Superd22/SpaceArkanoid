@@ -55,7 +55,6 @@ public class Level {
 		state.registerCurrentLevel(this);
 
 		new Ball().setFirstBall();
-		new Ball().setFirstBall();
 		
 		for(int x = 0; x < (level+1)*2; x++) {
 			for(int y = 0; y < 2; y++) {
