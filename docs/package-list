@@ -7,3 +7,6 @@ spaceArkanoid.controller.brick
 spaceArkanoid.helper
 spaceArkanoid.model
 spaceArkanoid.service
+spaceArkanoid.ui
+spaceArkanoid.ui.helper
+spaceArkanoid.ui.hud
