@@ -7,7 +7,7 @@ import spaceArkanoid.helper.GameEntityModel;
 public class Brick implements GameEntityModel {
 	public int pos_x = (int) (Math.random()*100);
 	public int pos_y = (int) (Math.random()*100);
-	public Color mainColor;
+	public Color mainColor = new Color(50,100,50);
 	
 	public final int width = 70;
 	public final int height = 30;

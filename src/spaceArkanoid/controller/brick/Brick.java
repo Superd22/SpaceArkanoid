@@ -16,9 +16,9 @@ import spaceArkanoid.service.State;
  */
 public class Brick implements GameEntity, ReactToCol {
 	
-	private spaceArkanoid.model.Brick model;
-	private State state = State.getState();
-	private BrickShadow shadow;
+	protected spaceArkanoid.model.Brick model;
+	protected State state = State.getState();
+	protected BrickShadow shadow;
 	
 	public Brick(int pos_x, int pos_y) {
 		this();
@@ -40,7 +40,7 @@ public class Brick implements GameEntity, ReactToCol {
 		shadow.render(g2);
 		
 		// Draw ourselves.
-		g2.setColor(new Color(50,100,50));
+		g2.setColor(model.mainColor);
 		g2.fillRect(model.pos_x, model.pos_y, model.width, model.height);
 	}
 

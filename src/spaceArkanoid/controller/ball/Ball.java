@@ -186,7 +186,7 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 		
 	}
 	
-	public void collidedWith(GameEntity entity) {
+	public synchronized void collidedWith(GameEntity entity) {
 		// TODO Auto-generated method stub
 		
 	}

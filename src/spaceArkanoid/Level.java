@@ -3,6 +3,7 @@ package spaceArkanoid;
 import spaceArkanoid.controller.Raquette;
 import spaceArkanoid.controller.ball.Ball;
 import spaceArkanoid.controller.brick.Brick;
+import spaceArkanoid.controller.brick.BrickBallSpawner;
 import spaceArkanoid.service.State;
 import spaceArkanoid.ui.GameOverOverlay;
 import spaceArkanoid.ui.NewLevelOverlay;
@@ -61,6 +62,9 @@ public class Level {
 				new Brick(x*75, y*35);
 			}
 		}
+		
+		
+		new BrickBallSpawner(250,250);
 		
 	}
 	
