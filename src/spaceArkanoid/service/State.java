@@ -36,6 +36,8 @@ public class State {
 	private long currentTime;
 	/** numbers of balls in play (0 = gameOver) */
 	private int ballCount;
+	/** number of bricks in play (0 = next level) */
+	private int brickCount;
 	private Level currentLevel;
 	
 	
@@ -124,6 +126,11 @@ public class State {
 		registerEntity((GameEntity) ball);
 	}
 	
+	public void registerEntity(Brick brick) {
+		brickCount++;
+		registerEntity((GameEntity) brick);
+	}
+	
 	/** 
 	 * Register an entity for update
 	 * @param entity the entity to register
@@ -151,6 +158,14 @@ public class State {
 		
 		/** @todo should we abstract some game over logic directly in the state ? */
 		if(ballCount <= 0) currentLevel.gameOver();
+	}
+	
+
+	public void unregisterEntity(Brick brick) {
+		brickCount--;
+		unregisterEntity((GameEntity) brick);
+		
+		if(brickCount <= 0) currentLevel.levelWon();		
 	}
 	
 	public ArrayList<GameEntity> getEntities() {

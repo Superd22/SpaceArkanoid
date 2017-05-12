@@ -6,6 +6,7 @@ import spaceArkanoid.controller.brick.Brick;
 import spaceArkanoid.service.State;
 import spaceArkanoid.ui.GameOverOverlay;
 import spaceArkanoid.ui.NewLevelOverlay;
+import spaceArkanoid.ui.NextLevelOverlay;
 
 /**
  * Main class for generating a level
@@ -15,6 +16,8 @@ import spaceArkanoid.ui.NewLevelOverlay;
 public class Level {
 	/** reference to the state */
 	private State state = State.getState();
+	/** the id of the level */
+	private int level;
 	/** reference to the bar of the level */
 	private Raquette bar;
 	/** width of the level */
@@ -25,18 +28,21 @@ public class Level {
 	private NewLevelOverlay nOverlay;
 	/** overlay for game over */
 	private GameOverOverlay goOverlay;
+	private NextLevelOverlay nlOverlay;
 	
 	/**
 	 * Creates a new level
 	 * @param n level difficulty/number
 	 */
 	public Level(int n) {
+		level = n;
 		generateLevel();
 		nOverlay = new NewLevelOverlay(this);
 		setOverlay();
 		nOverlay.setVisible(true);
 	}
 	
+
 	private void setOverlay() {
 		state.getFrame().setGlassPane(nOverlay);
 	}
@@ -51,8 +57,8 @@ public class Level {
 		new Ball().setFirstBall();
 		new Ball().setFirstBall();
 		
-		for(int x = 0; x < 10; x++) {
-			for(int y = 0; y < 5; y++) {
+		for(int x = 0; x < (level+1)*2; x++) {
+			for(int y = 0; y < 2; y++) {
 				new Brick(x*75, y*35);
 			}
 		}
@@ -67,6 +73,23 @@ public class Level {
 		goOverlay = new GameOverOverlay(this);
 		state.getFrame().setGlassPane(goOverlay);
 		goOverlay.setVisible(true);
+	}
+	
+	
+	/**
+	 * Called when this level is won.
+	 */
+	public void levelWon() {
+		
+		// Just to be sure.
+		cleanUp();
+		new Level(level+1);
+		
+		//nlOverlay = new NextLevelOverlay();
+		//state.getFrame().setGlassPane(nlOverlay);
+		//nlOverlay.setVisible(true);
+		
+		// At this point this level is discarded by the gc.
 	}
 	
 	/**
