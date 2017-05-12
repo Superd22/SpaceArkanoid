@@ -4,6 +4,7 @@ import java.awt.Shape;
 import java.awt.geom.*;
 import java.util.ArrayList;
 
+import spaceArkanoid.controller.PowerUp;
 import spaceArkanoid.helper.GameEntity;
 import spaceArkanoid.model.Ball;
 import spaceArkanoid.model.Brick;
@@ -98,6 +99,13 @@ public class Collision {
 			
 		}
 		
+	}
+	
+	public static boolean isThereCollision(PowerUp powerup, Raquette bar) {
+		Shape shapeA = new Rectangle2D.Double(bar.pos_x, bar.pos_y, bar.width, bar.height); 
+		Shape shapeB = new Rectangle2D.Double(powerup.x, powerup.y, powerup.width, powerup.height);
+
+		return Collision.testIntersection(shapeA, shapeB);
 	}
 
 }

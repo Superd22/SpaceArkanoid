@@ -138,4 +138,13 @@ public class Raquette implements GameEntity {
 		}
 	}
 	
+	/**
+	 * Realize a power-up of this raquette
+	 */
+	public void powerUp() {
+		if(model.width + 30 <= 190) {
+			model.width += 30;
+		}
+	}
+	
 }
