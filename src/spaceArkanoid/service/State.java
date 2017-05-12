@@ -39,6 +39,8 @@ public class State {
 	/** number of bricks in play (0 = next level) */
 	private int brickCount;
 	private Level currentLevel;
+	private int score;
+	private int lastFPS;
 	
 	
 	/** Holder */
@@ -239,6 +241,31 @@ public class State {
 
 	public void registerCurrentLevel(Level level) {
 		currentLevel = level;		
+	}
+
+	public int getLevelNumber() {
+		return this.currentLevel.getLevelNumber();
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public int getBallNumber() {
+		return ballCount;
+	}
+
+	public int getLastFPS() {
+		return lastFPS;
+	}
+
+	public void updateFPS(int fps) {
+		this.lastFPS = fps;
+		
+	}
+
+	public void addScore(int i) {
+		this.score += i;		
 	}
 	
 	

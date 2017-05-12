@@ -71,8 +71,7 @@ public class Game {
 	      // we last recorded
 	      if (lastFpsTime >= 1000000000)
 	      {
-	    	  System.out.println("(FPS: "+fps+")");
-	    	  System.out.println("(D: "+delta+")");
+	    	  state.updateFPS(fps);
 		      lastFpsTime = 0;
 		      fps = 0;
 	      }

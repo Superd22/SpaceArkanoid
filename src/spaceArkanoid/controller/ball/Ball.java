@@ -74,9 +74,7 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 	
 	private void reverseDy() {
 		synchronized(model) {
-			System.out.println("reverse");
 			model.dy = -model.dy;
-			System.out.println(model.dy);
 		}
 	}
 	
@@ -119,7 +117,6 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 			int nextDY = (int) - model.dy;
 			
 			synchronized(gm) {
-				System.out.println(gm.getDx());
 				model.dx = nextDX + gm.getDx()/50 ;
 			}
 			
@@ -130,7 +127,6 @@ public class Ball implements Runnable, GameEntity, ReactToCol {
 
 	
 	private synchronized void bounce() {
-		System.out.println(model.pos_y);
 		if(model.pos_x + model.width >= 500 || model.pos_x <= 0) {
 			if(		model.pos_x <= 0 && model.dx <= 0 ||
 					model.pos_x + model.width >= 500 && model.dx >=0

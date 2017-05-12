@@ -80,6 +80,7 @@ public class Brick implements GameEntity, ReactToCol {
 	 * @param ball
 	 */
 	public void collidedWith(Ball ball) {
+		state.addScore(50);
 		state.unregisterEntity(this);
 	}
 

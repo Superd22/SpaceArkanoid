@@ -103,5 +103,10 @@ public class Level {
 	public void activateLevel() {
 		bar.activate();
 	}
+
+
+	public int getLevelNumber() {
+		return level+1;
+	}
 	
 }

@@ -10,6 +10,7 @@ public class ScoreTile {
 	private int y;
 	private int width;
 	private int height;
+	private int text = 0;
 	
 	public ScoreTile(int x, int y, int width, int height) {
 		this.x = x;
@@ -23,6 +24,13 @@ public class ScoreTile {
 		g2.fillRect(x, y, width, height);
 		g2.setColor(borderColor);
 		g2.drawRect(x, y, width, height);
+
+		g2.setColor(new Color(200,200,200));
+        g2.drawString(Integer.toString(text), (x+width/2) - (Integer.toString(text).length() * 5) , 5 + y + height/2);
+	}
+
+	public void setText(int val) {
+		text = val;
 	}
 	
 }

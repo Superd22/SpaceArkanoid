@@ -56,9 +56,16 @@ public class MainHUD {
         g2.drawString("LEVEL",01,12);
 
         g2.drawString("FPS",450,12);
-        
+        int i = 1;
         for(ScoreTile tile : scoreTiles) {
+        	switch(i) {
+        	case 1: tile.setText(State.getState().getLevelNumber()); break;
+        	case 2: tile.setText(State.getState().getScore()); break;
+        	case 3: tile.setText(State.getState().getBallNumber()); break;
+        	case 4: tile.setText(State.getState().getLastFPS()); break;
+        	}
         	tile.render(g2);
+        	i++;
         }
 
 				
